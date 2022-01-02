@@ -1,0 +1,241 @@
+헷갈리는 개념정리 part
+
+오버로딩과 오버라이딩의 차이점
+1. 오버로딩
+- 메서드의 이름은 같고 매개변수의 갯수나 타입이 다른 함수를 정의하는 것을 의미한다.
+- 리턴값만을 다르게 갖는 오버로딩은 작성할 수 없다.
+2. 오버라이딩
+- over + ride = 먼가 위에서 달린다?
+- 상위 클래스의 메소드를 하위 클래스가 재정의 하는 것이다.
+- 메서드의 이름은 물론 파라미터의 갯수나 타입도 동일해야 하며, 주로 상위 클래스의 동작을 상속받은 하위 클래스에서 변경하기 위해 사용된다. 
+즉 
+오버로딩은 기존에 없던 새로운 메서드를 정의하는 것이고, 오버라이딩은 상속받은 메서드의 내용만 변경 하는 것이다.
+ 
+
+상수
+정의 : 변수와 마찬가지로 데이터를 저장할 수 있는 메모리 공간을 의미한다.
+
+하지만 상수가 변수와 다른 점은 프로그램이 실행되는 동안 메모리에 저장된 데이터를 변경할 수 없다는 점이다.
+상수에는 정수형, 실수형, 문자형 상수가 있다. 
+
+매개변수와 인수의 차이점
+매개변수는 함수를 정의할 떄 사용되는 변수를 의미한다. 
+ex) int add(int x, int y){
+    return x + y; 
+}
+여기서 (int x, int y) <- 이것을 매개변수라고 한다. 
+그렇다면 이수는 무엇인가? 인수는 함수가 호출될 때 매개변수에 실제로 담기는 값을 의미한다.
+ex) 위의 add 함수를 호출할때 add(2, 7); 이렇게 사용하게 되는데 이때 들어간 (2, 7)을 인수라고 한다. 
+
+private 변수 선언방법
+변수를 생성할때 변수명의 시작을 _로 해준다.
+ex) _id;
+이렇게 변수명을 적어주게되면 private 변수라는 뜻이다. 
+
+로컬 저장소와 원격저장소
+로컬 저장소 : 현재 사용하고 있는 컴퓨터 내부에 저장되어지는 곳!
+원격 저장소 : git hub와 같이 원격으로 업로드를 할 수 있는 곳을 뜻함!
+
+-----------------------------------------------------------------------------------------------------------------------------
+2022/01/01(토)
+
+dart 기본문법 공부하기! 		*강의 : 코드팩토리 유투브
+
+var 타입일 경우 첫 번째 선언했을때의 값의 타입이 var타입의 타입으로 지정이된다.
+ex) var name = '코드팩토리';
+var name = 1; // 이렇게 할 경우 오류가 발생한다. 처음 var타입의 값이 String으로 지정이 되었기 때문에 오류가 발생한다.
+
+하지만 
+dynamic 타입일 경우에는 var 타입과 다르게 다시 변수의 값을 선언할때 타입이 바뀌어도 상관이 없다.
+추가적으로 var타입을 dynamic 타입으로 변환하는 방법이 있는데 var타입의 변수를 지정할때 값을 선언하지 않고 
+ex) var name; 이렇게 선언하면 자동적으로 dynamic 타입으로 변환이 된다.
+
+List 
+2가지 방법이 있다.
+그냥 List 타입에 리스트명을 적어 생성하여도 되고 List<> 제네릭을 사용하여 안에 타입을 적어줘도 된다.
+만약 제네릭에 해당하는 List들의 타입을 선언해 준다면 그 List 안에는 해당 타입의 값들만 들어 올 수 있다. 
+하지만 첫번째 경우처럼 제네릭을 사용하여 타입을 지정하지 않은 경우에는 List에 다양한 타입이 들어올 수 있다.
+  List btsList = [
+    '진',
+    10,
+    '제이홉'
+  ];
+  List<String> redVelvetList = [
+   '아이린',
+    '슬기',
+    '웬디'
+  ];
+
+Map
+다음으론 Map인데 Map같은 경우는 자바의 HashMap과 아주 비슷하다. HashMap의 key와 Value를 생각하면된다.
+
+  Map dictionary = 
+  {
+    'Harry Potter' : '해리포터',
+    'Ron Weasley' : '론 위즐리',
+  };
+  Map<String, String> dictionary2 = 
+  {
+    'Harry Potter' : '해리포터',
+    'Ron Weasley' : '론 위즐리',
+  };
+이렇게 짝을 지어 값을 넣어 준다.
+이제 Map타입 변수에 값을 추가하고, 변경하고 삭제하는 방법을 알아보자.
+
+  dictionary.addAll({
+    'Hermione Granger' : '헤르미온느',
+  });
+  dictionary['Hermione Granger'] = '코드팩토리';
+  dictionary.remove('Hermione Granger');
+위에서부터 차레로 값을 추가하고, 변경하고, 삭제하는 방법이다.
+
+print(dictionary.keys.toList()); // Map타입의 변수인 dictionary의 키의 값들을 리스트 형식으로 출력해준다.
+print(dictionary.values.toList());  // Map 타입의 변수인 dictionary의 value 값들을 리스트 형식으로 출력해준다.
+
+final과 const
+final은 처음 선언한 값을 다시 바꿀 수 없다.
+const도 처음 선언한 값을 다시 바꿀 수 없다.
+하지만 final과 const의 dart에서의 차이는 final은 런타임에 값이 지정돼도 상관이 없다. ex) final now = new DateTime.now();
+const는 빌드타임에 꼭 값이 지정이 돼있어야 한다. 
+const타입일 경우 빌드타입에 값이 선언되어있지 않으면 런타임때 오류가 발생한다! 
+
+
+enum 
+enum타입은 1) 한정된 상수 값 집합을 나타내기 위해 사용한다. 2) 직관적인 코드 작성에 용이하다.
+ex) 
+enum Color{
+red, black, yellow
+}
+열거형의 변수를 설정할 때 명칭의 첫 문자를 대문자로 쓰는 게 관례이다.
+앞에 enum 키워드를 붙이고 중괄호 블록에 필드로 상수값들을 나열한다. 
+
+상수 목록은 List와 마찬가지로 인덱스로 관리할 수 있다.
+상수 목록 전체 값을 읽을 때는 .values를 사용한다.
+
+enum Status 
+{
+  approved,
+  rejected,
+  pending, // 대기중
+}
+void main()
+{
+  Status status = Status.rejected;
+  switch(status)
+  {
+    case Status.approved:
+      print('승인 상태 입니다.');
+      break;
+    case Status.rejected:
+      print('거절 상태 입니다.');
+      break;
+    case Status.pending:
+      print('대기 상태 입니다.');
+      break;
+    default:
+      print('어디에도 해당되지 않습니다.');
+      break;
+  }
+}
+
+함수
+
+함수의 기본형식
+리턴값 함수명 (매개변수(파라미터)){
+return a * x + b;
+}
+ex)
+
+double linearExp(double a, double b, double x){
+  return a * x + b;
+
+옵셔널 파라미터
+ex)
+double linearExp(double a, double x, [double b = 2]){
+  return a * x + b;
+}
+위의 예시에서 [double b = 2] 를 옵셔널 파라미터라고한다. 
+double res = linearExp(1, 2); 
+옵셔널이란 말그대로 옵션으로 인수로 값을 넣었을때 옵셔널 파라미터까지
+인수를 넣어준다면 그대로 파라미터의 값으로 계산이 되지만
+옵셔널 파라미터 자리에 인수를 넣지 않는다면 위의 예시에서 
+지정한 default 값인 2로 인식하여 계산하게 된다. 
+
+
+기본 파라미터란 포지셔널 파라미터라고 불리며 위의 예시처럼
+[double b = 2] 이런것을 옵셔널 파라미터, 다음으로 네임드 파라미터가 있다.
+ex)
+double linearExp(double a, double x, {double b}){
+  return a * x + b;
+}
+위와 같이 사용한 것이 네임드 파라미터(dart의 특이성)이고 
+main메소드에서 사용하려면 
+double res = linearExp(1, 2, b : 3); 이런식으로 
+값을 넣어주게 됩니다.
+
+typedef를 사용하면 함수를 미리 시그니처와 해서 여러가지 함수를 유용하게 다룰 수 있는
+기능을 제공해준다.
+typedef를 사용할때 주의할 점은 typedef에 정의해둔 것과 사용하려는 함수의 파라미터가 같아야 한다는 것이다.! 
+typedef Operation(int x, int y);이렇게 지정하였을때 Operation oper에 들어갈 수 있는 함수명들의 조건으로는 반드시 
+typedef Operation에서 지정한것과 같이 2개의 파라미터를 가져야 한다는 것이다. 
+
+-------------------------------------------------------------------------------------------------------------------------
+2022/01/02(일)
+
+Class
+
+기본적인 형태
+void main(){
+  Idol redVelvet = new Idol();
+  redVelvet.sayName();
+}
+class Idol{
+  String name = '레드벨벳';
+  void sayName()
+  {
+    print('저는 ${this.name}입니다.');
+  }
+}
+
+생성자
+생성자 기본 구조(다른 언어와 약간 다름)
+
+class Idol{
+  final name;
+  Idol(
+    String name
+  ) : this.name = name;
+  void sayName(){
+    print('저는 ${this.name}입니다.');
+  }
+}  
+
+이런식으로 변수 설정과 메소드 생성은 비슷하지만
+생성자를 만들때 
+  Idol(
+    String name
+  ) : this.name = name;
+이렇게 생성자를 만들어야 한다.
+
+깃 + 나머지 문법 진행할 예정
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
