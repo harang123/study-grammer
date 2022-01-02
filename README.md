@@ -217,24 +217,200 @@ class Idol{
   ) : this.name = name;
 이렇게 생성자를 만들어야 한다.
 
-깃 + 나머지 문법 진행할 예정
+생성자 오버로딩
+2가지 방법이 있는데 
+1. 기존 생성자에서 매개변수 내용의 값을 추가하는법
 
+Idol(String name, String group, int id)
+      : this.name = name,
+        this.group = group,
+        this._id = id;
 
+ Idol redVelvet = new Idol('슬기', '레드벨벳');
+  redVelvet.sayName();
+그러면 이런식으로 작성하면 되고 
+2. 기존 생성자와 다르게 생성자명이자 클래스 명에 .fromMap(Map values)
+를 사용하여 생성단계의 매개변수에서 값을 넣고 지정해주는 방법이다.
 
+  Idol.fromMap(Map values)
+      : this.name = values['name'],
+        this.group = values['group'],
+        this._id = values['id'];
 
+ Idol seulgi2 = new Idol.fromMap({'name': '슬기', 'group': '레드벨벳', 'id': '3'});
+물론 생성자는 클래스 안에 존재한다.
 
+class Idol {
+  final name;
+  final group;
+  final _id;
+  Idol(String name, String group, int id)
+      : this.name = name,
+        this.group = group,
+        this._id = id;
+  Idol.fromMap(Map values)
+      : this.name = values['name'],
+        this.group = values['group'],
+        this._id = values['id'];
+  void sayName() {
+    print('저는 ${this.name}입니다.');
+  }
+}
 
+private 변수
+final _id; <- 이렇게 변수의 시작이 _로 시작되는 변수가 private 변수라고한다.
+private변수는 원래는 가져올 수 없어야 한다. 하지만 연습할때 private변수를 가져올 수 있는 이유는 이것이 한 페이지에 같이 있기 때문이다. 만약 private변수가 다른 페이지에 있다면 이렇게 불러올 수가 없다. 
 
+dart에서 priavte 변수 또는 메소드는 클래스단위로 감춰지는 것이 아니라 페이지 단위로 감춰진다는 것을 알아야 합니다.
 
+Getter와 Setter
+get id{
+return this._id;
+}
 
+set id(int id){
+this._id = id;
+}
 
+상속
+class BoyGroup extends Idol {
+  BoyGroup(String name, String group, int _id) : super(name, group, _id);
+  void sayMale() {
+    print('저는 남자 아이돌입니다.');
+  }
+}
+class GirlGroup extends Idol {
+  GirlGroup(String name, String group, int _id) : super(name, group, _id);
+  void sayFemale() {
+    print('저는 여자 아이돌입니다.');
+  }
+상속을 할때 Idol 클래스를 상속받은 BoyGroup과 GirlGroup은 생성자를 반드시 생성하여야 하며 부모 클래스인 Idol의 생성자를 super(name, group, _id) 받아와야한다.
 
+오버라이딩
 
+class Parent {
+  final int number;
+  Parent(int number) : this.number = number; // 생성자를 뜻한다.
+  int calculate() {
+    return this.number * this.number;
+  }
+}
+class Child extends Parent {
+  Child(int number) : super(number);
+  @override
+  int calculate() {
+    int result = super.calculate();
+    return result + result;
+  }
+}
+오버라이딩은 자바와 똑같은 개념이다. 상속받을때 생성자가 다르니 생성자를 한번 더 확인하자! 
+* 오버라이딩을 해도 super.calculate() // 이런식으로 부모의 메소드를 사용할 수 있다.
 
+Static 키워드
+static 으로 정의한 변수는 클래스에 바로 귀속이 되며 
+static 변수 값을 사용할 때는 클래스명에 .을 붙여 바로 사용할 수 있다. 
 
+interface
+dart에서 interface는 좀 특이한 점이 있다. 다른 언어들처럼 키워드가 따로 있는 것이 아니라 클래스를 그대로 인터페이스로 사용할 수 있다.
 
+void main() {
+  BoyGroup bts = new BoyGroup('BTS');
+  bts.sayName();
+  GirlGroup redVelvet = new GirlGroup('레드벨벳');
+  redVelvet.sayName();
+}
+class IdolInterface {
+  void sayName() {}
+}
+class BoyGroup implements IdolInterface {
+  String name;
+  BoyGroup(String name) : this.name = name;
+  void sayName() {
+    print('제 이름은 ${name}입니다.');
+  }
+}
 
+cascadeoperate
+밑의 코드에서 보면 위의 코드에서는 3줄로 작성해야 하지만
+cascadeoperate를 사용하면 아래와 같이 한줄로 작성할 수 있다.
+  BoyGroup bts = new BoyGroup('BTS');
+  bts.sayName();
+  bts.sayGroup();
 
+  new BoyGroup('BTS')
+    ..sayName()
+    ..sayGroup();
 
+List의 getter들
 
+  print(redVelvet.first);  // 첫번째껄 나타내는 것
+  print(redVelvet.isEmpty);  // 비어있는지 확인하는거
+  print(redVelvet.isNotEmpty);  // 안비어있는지 확인하는 것
+  print(redVelvet.length);  // 길이 나타내는 것
+  print(redVelvet.last); // 마지막껄 나타내는 것
+  print(redVelvet.reversed);  // 값을 반대로 나타내는 것
+  redVelvet.add('코드팩토리');  // ()안의 값을 리스트에 추가하는 것
+  redVelvet.addAll(['코팩1', '코팩2']);  // ()안에 추가로 []안에 적어 추가하는 방법
 
+List 탐색하는 법
+
+void main() {
+  List membersList = [
+    {
+      'id' : 0,
+      'name' : '슬기'
+    },
+    {
+      'id' : 1,
+      'name' : '아이린'
+    },
+    {
+      'id' : 2,
+      'name' : '조이',
+    }
+  ];
+  var item = membersList.firstWhere((item) => item['id'] == 1);
+  print(item);
+}
+이건 첫번째로 조건에 해당되는 리스트를 탐색하는 방법이다.
+여기서 중요한건 리스트 변수명인 membersList. 뒤의 내용이다.
+1) firstWhere <- 이 뜻은 첫번째로 조건에 해당되는 리스트의 값을 가져온다는 뜻이다.
+2) var index = membersList.indexWhere((item) => item['id'] == 1);
+이건 위와 마찬가지로 indexWhere이므로 조건에 해당되는 인덱스를 찾는 것이다.
+위와 같이 indexWhere를 사용하여 찾을 수 있다.
+3) var index2 = [10, 20, 30].indexOf(20);
+indexOf를 배울건데 이것은 값이 똑같아야 한다. indexOf()의 괄호안에 넣은 값과
+리스트에 있는 값이 똑같은 인덱스를 찾는 것이다.
+4) var contains = [10, 20, 30].contains(30);
+이건 contains이다. 해당 리스트에 ()안의 값이 포함되어있으면 true 없으면 false이다.
+
+List의 forEach, map
+
+void main() {
+  List membersList = [
+    {'id' : 0,
+    'group' : '레드벨벳',
+    'name' : '아이린'
+    },
+    {
+      'id' : 1,
+      'group' : 'BTS',
+      'name' : 'RM'
+    },
+    {
+      'id' : 2,
+      'group' : '레드벨벳',
+      'name' : '슬기'
+    }
+  ];
+  membersList.forEach((i){print(i);});
+}
+forEach는 다음과 같이 사용한다. 
+
+var newList = membersList.map((item){
+    return item['name'];
+  });
+  print(newList);
+map은 다음과 같이 사용한다. 위와같이 하면 membersList에서 name의 값들로만
+이루어진 리스트가 새로 만들어진다.
+... 추가로 내일 문법 공부 + 마크다운 공부(깃 readme.md 가독성높이기) + 문제풀기
