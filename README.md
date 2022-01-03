@@ -413,4 +413,70 @@ var newList = membersList.map((item){
   print(newList);
 map은 다음과 같이 사용한다. 위와같이 하면 membersList에서 name의 값들로만
 이루어진 리스트가 새로 만들어진다.
-... 추가로 내일 문법 공부 + 마크다운 공부(깃 readme.md 가독성높이기) + 문제풀기
+
+ dart Operators
+int number = 4;
+number /= 2; <- 이렇게 하면 오류가 발생한다. dart에서는 기본적으로 설정이 되어있는데 /=을 하였을때 2를 double 형식의 타입으로 인식하게 된다. 따라서 int인 number를 double로 나누려하니 오류가 발생하게 된다.
+
+- 타입을 비교하는 방법
+ex)
+int number1 = 1;
+print(number is int);
+결과값 : true
+타입을 비교하고 싶을땐 is를 써서 참 거짓을 확인할 수 있다.
+~이 아니다 같은 경우에는
+print(number is! int); <- 이렇게 is! 을 써서 아니다란 의미로 사용할 수 있다.
+
+enum 타입의 장점
+직관적으로 어떠한 요소들이 있는지 쉽게 파악할 수 있다.
+따로 멘션을 넣지 않더라도 알 수 있다. 열거형을 사용하지 않았을때는
+철자 오류 같은 부분도 쉽게 알 수 없다.
+
+마지막으로 모든 요소(옵션)들을 보고 싶을때는 열거형변수에
+.values를 사용하여 확인할 수 있다.
+
+getter와 setter 추가!
+getter와 setter를 사용할때 함수처럼 .name() 이렇게 붙이는 것이 아니라
+.name 이렇게만 사용해 준다.
+
+List를 선언하는 방법은 2가지이다.
+List arr = [];
+List arr = new List();
+
+List arr = new List(3); // 3개의 데이터를 가지는 List로 선언한다.
+List<String> // <>안에는 type을 지정 가능
+
+split() 메소드
+ex) var Str = 'Hello world!';
+str.split(" "); 
+출력 값 : ['Hello', 'world!']; 이렇게 배열의 형태로 쪼개준다. 
+위의 내용을 바탕으로 
+String data 에서 공백을 포함한 값 여러개를 받은 다음 그걸 split()메소드를 이용하여 List arr에 넣어준다. 그러면 arr은 공백을 기준으로 입력한 만큼의 배열이 된다.
+그렇게 만들어진 arr 배열을 다시 int값만 받는 arrInt 변수에 map(int.parse).toList();를 이용하여 넣어준다. map()함수는 반복되는 값을 다른 형태로 변환시켜 줍니다.
+	String data = stdin.readLineSync();
+	List<String> arr = data.split(' ');
+	List<int> arrInt = arr.map(int.parse).toList();
+
+Map() 심화!
+
+Map map = {
+'Apple' : '사과',
+'Banana' : '바나나',
+'Kiwi' : '키위',
+};
+map.keys.toList() <- 이렇게 하면 이거 자체가 다시 리스트가 되기떄문에
+리스트에 사용가능한 모든 함수들을 사용할 수 있다.
+
+String에 대한 크기(길이)를 구할 수 있다.
+ex) 
+int a = 33;
+String myNum = a.toString();
+print(myNum.length); 
+결과 값 : 2
+ex2)
+String h = 'harang';
+print(h.length);
+결과 값 : 6
+ 
+문법이 쉽다고 생각했는데 세부적으로 아직 숙달이 덜 됐다는 것을 느꼇고 내일 왕초보 유투브를 다시 정독하여 확실히 익히고 문제를 풀어보려한다. 
+ 
