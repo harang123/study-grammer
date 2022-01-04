@@ -37,6 +37,7 @@ ex) _id;
 - 원격 저장소 : git hub와 같이 원격으로 업로드를 할 수 있는 곳을 뜻함!
 
 ****
+
 # List
 
 #### 정의 : 여러개의 값을 저장할 수 있는 클래스이다.(배열)
@@ -153,50 +154,86 @@ arrow 함수의 특징
 
 ****
 
-Map
-map 또한 List와 마찬가지로 하나의 변수에 여러개의 값을 넣을 수 있다. Map을 보통 Key Value Pair라고 부른다. 사전과 같다.
-map의 선언방법 : 
-Map dictionary = {
-Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+# Map
+
+#### 정의 : map 또한 List와 마찬가지로 하나의 변수에 여러개의 값을 넣을 수 있다. Map을 보통 Key Value Pair라고 부른다. 사전과 같다고 보면된다.
+
+map의 선언방법 : 크게 형태는 2가지이고 값을 넣지 않았을 경우와 넣었을 경우로 나누어보았다.
+
+1) Map dictionary = {}; 
+2) Map dictionary2 = {
+	Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
 };
-Map에서 만약 key값을 가지고 value값을 찾아내고 싶을때는 
-List와 다르게 인덱스를 넣는 것이 아닌 key값을 넣어서 찾아준다.
-dictionary[key값] <- 이런식으로 값을 넣어주면 저것이 value값을 알려준다.
-
-Map또한 값을 아무것도 넣지 않고도 Map을 생성할수 있다.
-Map dictionary2 = {}; <- 이렇게 생성하면된다.
-이럴경우에 값을 넣고 싶으면 .addAll이라는 메소드를 사용하면된다.
-ex) dectionary2.addAll({
-Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+3) Map dictionary3 = new Map(); 
+4) Map dictionary4 = new Map.from({
+	Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
 });
-이런식으로 addAll로 값을 넣어준다.
 
-다음으론 Map에서 값을 지우는 방법이다. remove메소드를 사용하여 지워줄수 있다.
-dictionary2.remove(key값); <- 이런식으로 코드를 작성하면 Map안에서 해당key값과 그에 해당하는 value값을 지울 수 있다.
-
-다음으론 값을 변경하는 방법이다. 이거 역시 그냥 key값을 넣고 변경해주면된다.
-dectionary2[key값] = value값;
-이런식으로 작성하면 된다.
-
-Map또한 Map을 생성하는 방법이 2가지가 있는데 
-1) Map dictionary = {};
-2) Map dictionary2 = new Map(); 
-이렇게 2가지가 있다.
-여기서는 List처럼 2번째 방법에서 만약 값을 넣은채로 사용하고 싶을 경우에
-from 메소드를 사용하여 준다.
-ex) Map dectionary3 = new Map.from({
-Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+Map에서 값 추가방법 : 
+dictionary.addAll({
+	Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
 });
-이런식으로 만들면 된다.
+Map에서 값 지우는 방법 : dictionary.remove(key값);
+Map에서 값 변경하는 방법 : dictionary[key값] = value값;
 
-이제 마지막으로 Map에서 key값만 다 가져오는 방법 : 
-dictionary3.keys.toList(); <- 이 뜻은 Map자료형인 dictionary3에서 key의 값들을 List형식으로 만들어준다는 뜻이다.
-value값만 다 가져오는 방법 : 
-dictionary3.values.toList(); <- 이건 value값들을 List형식으로 만들어준다는 뜻이다.
+key값만 가져오는 방법 : dictionary.keys;
+value값만 가져오는 방법 : dictionary.values;
+하지만 이렇게만 값을 가져온다면 리턴값은 Iterable형태를 취하게 됨으로 List형태로 리턴하고 싶다면 dictionary.keys.toList() or dictionary.values.toList() 로 작성을 해주어야한다.
 
-List든 Map이든 들어가는 자료형들을 생성할때 꼭 써주는게 좋다! ex) Map<String, String> dictionary4 = {}; <- 이렇게 어떤 형태가 key와 value값으로 들어가는지 기입해주는게 더 좋다.
+- Map에서의 key값은 유니크해야한다. 이 말은 만약 key의 값에 또다른 value를 넣어주면 이전에 있던 해당 key에 대한 value값에 새로 넣어준 value값이 덮어 씌워진다. 
+List와 다르게 같은 값을 중복하여 넣을수 없다는 뜻이다! Map에서 Key는 딱 하나만 존재할 수 있다. 같은 값 존재 불가능!
 
-참고로 Map에서의 key값은 유니크해야한다. 이 말은 만약 key의 값에 또다른 value를 넣어주면 이전에 있다. 해당 key에 대한 value값에 새로 넣어준 value값이 덮어 씌워진다. List와 다르게 같은 값을 중복하여 넣을수 없다는 뜻이다.! Map에서 Key는 딱 하나만 존재할 수 있다. 같은 값 존재 불가능!
+## Map 심화 - map이랑 List랑 연계되는것이  많아 알아놔야할게 있다.
+
+	Map<String, String> map = {
+		'Apple' : '사과',
+		'Banana' : '바나나',
+		'Kiwi' : '키위',
+	};
+map.values.toList() -> 이렇게 List로 map의 값들을변경해 주고나면  위의 List심화에서 배웠던 여러 메소드들을 사용할수  있게 된다. 
+map에서도 mapping을 할 수 있다. entries를 사용하면되는데 아래와 같이 사용하면 map을 사용할 수 있다.
+
+	final newMap = map.entries.map((entry){
+		final key = entry.key;
+		final value = entry.value;
+
+		return '$key는 한글로 $value입니다.';
+	});
+mapping이니까 리턴을해줘야하는데  위와같이 사용하면 map에 들어있는 값들이
+Apple는 한글로 사과 입니다., Banana는 한글로 바나나입니다., Kiwi는 한글로 키위 입니다.) 이런식으로 바뀌는것을알 수있다. 
+이렇게 해서 List심화에서배웠던 forEach, map, reduce, fold와 같은 메소드들을 다 사용할 수 있다. 
+map 변수.entries. forEach / map / reduce / fold 이렇게 사용이  가능하다.
+
+
+### asMap()
+
+	List<int> numbers = [
+		0, 1, 2, 3, 4, 
+	];
+
+	final newMap2 = numbers.map((item){
+		return '값이 $item 입니다.';
+	});
+
+asMap함수를 어떨때 사용하냐면 위와같이 mapping을 사용하여 numbers 리스트안의 값들을변경해 주는데 그 값들의 인덱스와 value값을 통째로 받고 싶을때 사용한다. 
+
+	final newMap3 = numbers.asMap(); 
+위와같이 numbers의 값들을 map으로 바꿀수가 있는데이렇게  설정을 해주면 print(newMap3)를 했을 때 
+{0: 0, 1: 1, 2: 2, 3: 3, 4: 4} 이런식으로 출력이된다. 이 뜻이 무엇이냐하면 List인 numbers의 값들 앞에 인덱스 번호가 key값으로 들어간것이다 .
+
+	final newMap3 = numbers.asMap().entries.map((entry){
+		final index = entry.key;
+		final value = entry.value;
+
+		return 'index가 $index 일때 값은 $value 입니다.';
+	});
+그런다음 위와같이 작성해주면 index가 0일때 값은 0입니다. 이런식으로 mapping을 사용할수가 있게된다.
+
+
+
+
+
+
 
 Operators
 계산 operator
@@ -219,97 +256,6 @@ print(number1 is! String) => true;
 switch와 if문의 차이는 만약 한가지 조건인데 그에 해당하는 값이 여러개인 경우에는 switch문을 사용하는게 더 빠르고 좋고
 조건을 여러가지를 비교해야하는 상황이면 if문을 사용하는게 좋다!
 
-Map 심화! - map이랑 List랑 연계되는것이  많아 알아놔야할게 있다.
-void main(){
-Map<String, String> map = {
-'Apple' : '사과',
-'Banana' : '바나나',
-'Kiwi' : '키위',
-};
-
-print(map.keys);
-print(map.values);  <- 바로위의 keys값들도 마찬가지로 이렇게 하면 각각의 key와 value값들을 Iterable값으로 가져와 출력이된다는 것을 알 수 있다. 
-}
-만약 map.values.toList() -> 이렇게 List로 map의 값들을변경해 주고나면  위의 List심화에서 배웠던 여러 메소드들을 사용할수  있게 된다. 
-map에서도 mapping을 할 수 있다. 
-Mappint - map => (entry) 
-우선 mapping을 하려면 값을 받아야 함으로 
-final newMap = map.entries.map((entry){
-final key = entry.key;
-final value = entry.value;
-
-return '$key는 한글로 $value입니다.';
-});
-이렇게 map을 mapping을 하고싶으면 우선 해당 map에 .entries를 적어주고 다시 .map을 적어준뒤  파라미터로 함수를받는데 그 변수로 (entry)를 넣어주고 이 entry는 map의 key값과 value값들을 모두가져올수  있습니다. 또한 이 entry안에서 다시 key값과 value값을 나눠서 받을수가 있다.
-위에서 보듯이 final key = entry.key; final value = entry.value; 이런식으로 받아오는게가능하다 .
-mapping이니까 리턴을해줘야하는데  위와같이 사용하여주면 map에 들어있는 쨸 위의 값들이
-Apple는 한글로 사과 입니다., Banana는 한글로 바나나입니다., Kiwi는 한글로 키위 입니다.) 이런식으로 바뀌는것을알 수있다. 
-
-이렇게 해서 List심화에서배웠던 forEach, map, reduce, fold와 같은 메소드들을 다 사용할 수 있다. 
-map 변수.entries. forEach / map / reduce / fold 이렇게 사용이  가능하다.
-
-
-asMap() 함수
-asMap함수를 어떨때 사용하냐면 아래와같이  mapping을 사용하여 numbers 리스트안의 값들을변경해 주는데 그 값들의 인덱스와 value값을 통째로 받고 싶을때 사용한다. 
-ex)
-List<int> numbers = [
-0, 1, 2, 3, 4, 
-];
-
-final newMap2 = numbers.map((item){
-return '값이 $item 입니다.';
-});
-
-final newMap3 = numbers.asMap(); 
-<- 이렇게 numbers의 값들을 map으로 바꿀수가 있는데이렇게  설정을 해주면
-print(newMap3)를 했을 때 {0: 0, 1: 1, 2: 2, 3: 3, 4: 4} 이런식으로 출력이된다. 이 뜻이 무엇이냐하면 List인 numbers의 값들 앞에 인덱스 번호가 key값으로 들어간것이다 .
-이제 이것을 사용하여 바꿔보자면
-final newMap3 = numbers.asMap().entries.map((entry){
-final index = entry.key;
-final value = entry.value;
-
-return 'index가 $index 일때 값은 $value 입니다.';
-});
-이런식으로 할수있다.
-
-
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-
-
-Map
-다음으론 Map인데 Map같은 경우는 자바의 HashMap과 아주 비슷하다. HashMap의 key와 Value를 생각하면된다.
-
-  Map dictionary = 
-  {
-    'Harry Potter' : '해리포터',
-    'Ron Weasley' : '론 위즐리',
-  };
-  Map<String, String> dictionary2 = 
-  {
-    'Harry Potter' : '해리포터',
-    'Ron Weasley' : '론 위즐리',
-  };
-이렇게 짝을 지어 값을 넣어 준다.
-이제 Map타입 변수에 값을 추가하고, 변경하고 삭제하는 방법을 알아보자.
-
-  dictionary.addAll({
-    'Hermione Granger' : '헤르미온느',
-  });
-  dictionary['Hermione Granger'] = '코드팩토리';
-  dictionary.remove('Hermione Granger');
-위에서부터 차레로 값을 추가하고, 변경하고, 삭제하는 방법이다.
-
-print(dictionary.keys.toList()); // Map타입의 변수인 dictionary의 키의 값들을 리스트 형식으로 출력해준다.
-print(dictionary.values.toList());  // Map 타입의 변수인 dictionary의 value 값들을 리스트 형식으로 출력해준다.
 
 final과 const
 final은 처음 선언한 값을 다시 바꿀 수 없다.
