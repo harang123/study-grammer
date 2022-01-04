@@ -61,108 +61,95 @@ List의 선언 방법은 여러가지가 있는데 우선 유동적인지 고정
 ]);
 
 ## List 심화
-1. Looping(순환한다는 뜻)
+1. Looping(순환한다는 뜻) - forEach
 
-	List<String> redVelvet = [
-	'아이린', '슬기', '웬디', '조이', '예리',
-	];
-일반적으로 Looping할때는 forEach를 사용한다. 이것은 List의 메소드이다. 
-Looping - forEach // forEach에서는 파라미터로 함수를 받는다. 거기다가 그 함수에 파라미터도 받는다. 이 파라미터 값은 어떠한 변수를 설정하여 넣어준다.
+		List<String> redVelvet = [
+		'아이린', '슬기', '웬디', '조이', '예리',
+		];
 
-redVelvet.forEach((value){
-print(value);
-});
-이렇게 하면 List redVelvet의 요소들이 차레로 출력이된다.  또한 forEach의 특징으로는 forEach로 나온 값들은 따로 return 값을 받지 않았다.
-forEach함수 안에서 모든것을 해결하였다. 
-forEach메소드를 실행하면 리스트의 각각의 값을 루핑(for문처럼 돌면서) 이 파라미터안에 넣어준 변수인 value안에 각 값을 넣어준다.
-그래서 그 값들로 우리가 어떠한 처리를 하면 되는 것이다. ex) print(value);
+		redVelvet.forEach((value){
+			print(value);
+		});
+forEach 함수의 특징
+- 따로 return 값을 받지 않는다.
+- forEach함수 안에서 모든 것을 해결한다.
+
+Looping - forEach // forEach에서는 파라미터로 함수를 받는다. 해당 함수에 파라미터도 받는다. 이 파라미터값은 어떠한 변수를 설정하여 넣어준다.
+위의 코드에서는 value를 변수로 지정하여 파라미터에 넣었다. 위의 코드를 실행하면 List redVelvet의 요소들이 차례로 출력이된다.
 위의 forEach문과 아래의 for-in 구문은 완전히같은 것이다. 어떤걸 선택하여 쓰는지는 개인적인 취향에 따라 다르다.
-for(String value in redVelvet){
-print(value);
-};
 
-2) Mapping - map (Mapping에서는 일반적으로 map을 사용한다.)
-ex)
-final newList = redVelvet.map((value){
-return '제 이름은 $value입니다.';
-});
-이 map이라는 것은 위의 forEach와는 다르게 리턴값을 받을 수 있다.
+	for(String value in redVelvet){
+		print(value);
+	};
+
+2. Mapping - map 
+
+		final newList = redVelvet.map((value){
+			return '제 이름은 $value입니다.';
+		});
+map 함수의 특징
+- forEach와 다르게 리턴값을 받는다.
+- Iterable(List의 부모 클래스) 형태로 리턴된다, List형식으로 바꾸고 싶으면 리턴값에 .toList()를 붙여주면된다.
+
 이런식으로 작성하면 redVelvet에 들어있는 각각의 값들을 value로 받아 '제 이름은 $value입니다.'로 값들을 변경해주며 그 값들을 다시 newList의 값들로 넣어주게 됩니다.
-여기서 체크할 것은 map을 사용하였을때 newList를 출력해보면 () <- 소괄호 안에 값들이 들어 있는 것을 알수있다. 이 이유는 map의 출력값들은 List의 부모 클래스인 Iterable형태로 출력되기 때문이다. 만약 List형식으로 바꾸고 싶으면 끝에 .toList()를 붙여주면 된다.
+map은 해당 리스트를 새로운 값이나 새로운형태로 바구고 싶을 때 사용한다.
 
-3) Reduce / Fold -> 이것은 Reduce란 함수와 Fold란 함수를 실행하는 것이다.
-3-1) Fold 
-각각의 값들을 루핑(for문과 같은 순환)을 시키면서 그 값들을 이용하여 total을 쌓아가는 역할을 합니다.
-ex)
-List<int> numbers = [
-0, 1, 2, 3, 4, 5, 
-];
-int toal = numbers.fold(0, (total, element){
-return total + element;
-});
-위에서 total은 numbers라는 리스트의 값들을 더한 값을 저장하기 위해 생성한 변수이다.
-fold에는 포지셔널 파라미터가 2개가 들어가는데 처음에 들어가는 것은 처음에 시작하는 값이 들어간다. 
-0부터 시작할거면 0, 1부터 시작할거면 1
-다음으로 두번째로 어갈 파라미터로는 함수가 들어가는데 해당 함수의 파라미터에도 2개의 값이 들어간다.
-여기서 들어가는 2개의 변수는 임의의 변수로 지정해도 상관 없다. 또한 이 안에 들어가는 함수의값도  리턴값을 받는데 
-여기서 numbers의 각 값들이 두번째 파라미터 자리에 들어간 함수의 파라미터중 element자리에 들어가게된다 . 그리고
-루핑을 할때마다 처음에는 0부터 시작하여 total이라는 값이 안에서 리턴해주는값이 total값이 된다.
-그러면 리턴값으로 return total + element; 이렇게 함수의 바디가 정해지게된다 . 그래서 int total 값으로numbers 리스트에 있는 모든 값들을 더한 값이 들어가게 된다. 
+3. fold
+
+		List<String> names = [
+		'코드팩토리', '레드벨벳', 'BTS'
+		];
+		int total3 = names.fold(0, (total, element){
+			return total + element.length;
+		});
+fold 함수의 특징
+- 각각의 요소들의 총합을 루핑으로 순환하며 쌓아가는 함수이다.
+- 시작값을 파라미터로 정해준다.
+- numbers 리스트 요소의 값과 fold함수를 사용하여 리턴한 값의 형태가 달라도 상관없다.
+
+fold에는 포지셔널 파라미터가 2개가 있으며 처음에 들어가는 파라미터는 처음 시작하는 값이 들어간다. ex) 0부터 시작할거면 0, 1부터 시작할거면 1
+두번째로 들어갈 파라미터로는 함수가 들어가는데 해당 함수에도 2개의 파라미터가 있다.
+여기서 numbers의 각 값들이 두번째 파라미터 자리에 들어간 함수의 파라미터중 element자리에 들어가게된다 . 
+루핑을 할때마다 처음에는 0부터 시작하며 리턴한 값이 다음 루핑의 total값이 된다.
+계속 루핑을 하고나면 int total 값으로 numbers 리스트에 있는 모든 값들을 더한 값이 들어가게 된다. 
 
 여기서 위의 파라미터 안의 total 값은 무조건 첫번째 값이 됨으로 0이 된다. 
 (0, (total, element) <- 여기서처음시작하는값이  0이기 떄문에 total은 0으로 시작하게된다 . 
-따라서 이 fold는 값을 쌓아갈때 자주 사용이 된다.!! 고 알고있으면 될거 같다.
+fold는 값을 쌓아서 누적된 값을 알고 싶을때 사용한다.
 
-3-2) reduce
-ex)
-List<int> numbers = [
-0, 1, 2, 3, 4, 5, 
-];
+4. reduce
 
-int toal2 = numbers.reduce((total, element){
-return total + element;
-});
+		List<int> numbers = [
+			0, 1, 2, 3, 4, 5, 
+		];
+		int toal2 = numbers.reduce((total, element){
+			return total + element;
+		});
+reduce 함수의 특징
+- numbers 리스트 요소의 값과 reduce함수를 사용하여 리턴한 값의 형태가 반드시 같아야 한다. ex) numbers요소가 int형이면 반드시 리턴값이 int형이어야 한다.
 
 reduce에서는 파라미터를 하나 받는데 함수를 받는다. 
-reduce도 fold랑 거의 비슷하다. 
-reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없이 파라미터로 함수하나를 받아 실행하고 
-가장 처음 시작하는 값이 total값이 된다. 
-reduce와 fold가 둘다 필요한 이유는 reduce는 numbers 리스트 안에 들어있는 각각의 값들과 리턴값이 반드시 같아야 하고 fold는 상관이 없다.
-fold의 사용예로는
-List<String> names = [
-'코드팩토리', '레드벨벳', 'BTS'
-];
+reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없고 파라미터로 함수를 하나 받아 실행하며 가장 처음 시작하는 값이 total값이 된다. 
 
-int total3 = names.fold(0, (total, element){
-return total + element.length;
-});
-이렇게 List의 각각의값 들은 String인데 fold함수를 사용하여 int값으로 값을 받아올 수 있다. 
-다시 정리하자면 List 내부의값들의 타입과 fold함수를 사용하여 리턴해주려는 값이 다르면 fold를 사용해야하고
-같으면 reduce를 사용하면 된다. 
+5. arrow
 
-3-3) arrow 함수
-
-int total3 = numbers.reduce((total, element) => total + element); <- 안에서 =>의 값이 리턴이 된다는뜻이다. 
-이렇게 작성하는 을 arrow함수라고부른다. 위와같이 성한 것은 결국 reduce함수와 똑같은 기능을 수행한다. 
-int toal2 = numbers.reduce((total, element){
-return total + element;
-});
-다시말해 3-3)안에서 위의 함수와 아래의함수가  같다는 뜻이다. 이건 Mapping에서도 똑같다.
-만약 
-final newList = redVelvet.map((value){
-return '제 이름은 $value입니다.';
-});
-이런 함수가 있다면
-final newList = redVelvet.map((value) => '제 이름은 $value입니다.'); 이렇게 적어도 같은 뜻이된다.
-
-
-List 정리!
-Looping에서는 - forEach를사용한다.
-Mapping - map이라는메소드를  사용하는데 이것은 forEach와 조금다르게 리턴값을 돌려주는데 새로운 리스트를 만들수 있게해준다 . 
-
-Reduce - reduce 함수를 사용한다. 
-Fold = fold함수를사용한다 . 
-Reduce와 Fold는 둘다 값을 점점 쌓아갈때 사용한다. 
+		int total3 = numbers.reduce((total, element) => total + element); 
+		
+			// 위와 아래의 코드가 같은 코드이다.
+			
+		int toal2 = numbers.reduce((total, element){
+			return total + element;
+		});
+		--------------------------------------------------------------
+		final newList = redVelvet.map((value) => '제 이름은 $value입니다.'); 
+		
+			// 위와 아래의 코드가 같은 코드이다.
+			
+		final newList = redVelvet.map((value){
+			return '제 이름은 $value입니다.';
+		});
+arrow 함수의 특징
+- 단, 함수내부의 내용이 한줄일 때만 사용이 가능하다. 두 줄이 넘어가면 arrow함수로 작성할 수 없다.
 
 ****
 
