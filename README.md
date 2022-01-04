@@ -61,7 +61,7 @@ List의 선언 방법은 여러가지가 있는데 우선 유동적인지 고정
 ]);
 
 ## List 심화
-1. Looping(순환한다는 뜻) - forEach
+### 1. Looping(순환한다는 뜻) - forEach
 
 		List<String> redVelvet = [
 		'아이린', '슬기', '웬디', '조이', '예리',
@@ -82,7 +82,7 @@ Looping - forEach // forEach에서는 파라미터로 함수를 받는다. 해�
 		print(value);
 	};
 
-2. Mapping - map 
+### 2. Mapping - map 
 
 		final newList = redVelvet.map((value){
 			return '제 이름은 $value입니다.';
@@ -94,7 +94,7 @@ map 함수의 특징
 이런식으로 작성하면 redVelvet에 들어있는 각각의 값들을 value로 받아 '제 이름은 $value입니다.'로 값들을 변경해주며 그 값들을 다시 newList의 값들로 넣어주게 됩니다.
 map은 해당 리스트를 새로운 값이나 새로운형태로 바구고 싶을 때 사용한다.
 
-3. fold
+### 3. fold
 
 		List<String> names = [
 		'코드팩토리', '레드벨벳', 'BTS'
@@ -117,7 +117,7 @@ fold에는 포지셔널 파라미터가 2개가 있으며 처음에 들어가는
 (0, (total, element) <- 여기서처음시작하는값이  0이기 떄문에 total은 0으로 시작하게된다 . 
 fold는 값을 쌓아서 누적된 값을 알고 싶을때 사용한다.
 
-4. reduce
+### 4. reduce
 
 		List<int> numbers = [
 			0, 1, 2, 3, 4, 5, 
@@ -131,7 +131,7 @@ reduce 함수의 특징
 reduce에서는 파라미터를 하나 받는데 함수를 받는다. 
 reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없고 파라미터로 함수를 하나 받아 실행하며 가장 처음 시작하는 값이 total값이 된다. 
 
-5. arrow
+### 5. arrow
 
 		int total3 = numbers.reduce((total, element) => total + element); 
 		
@@ -153,9 +153,136 @@ arrow 함수의 특징
 
 ****
 
+Map
+map 또한 List와 마찬가지로 하나의 변수에 여러개의 값을 넣을 수 있다. Map을 보통 Key Value Pair라고 부른다. 사전과 같다.
+map의 선언방법 : 
+Map dictionary = {
+Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+};
+Map에서 만약 key값을 가지고 value값을 찾아내고 싶을때는 
+List와 다르게 인덱스를 넣는 것이 아닌 key값을 넣어서 찾아준다.
+dictionary[key값] <- 이런식으로 값을 넣어주면 저것이 value값을 알려준다.
+
+Map또한 값을 아무것도 넣지 않고도 Map을 생성할수 있다.
+Map dictionary2 = {}; <- 이렇게 생성하면된다.
+이럴경우에 값을 넣고 싶으면 .addAll이라는 메소드를 사용하면된다.
+ex) dectionary2.addAll({
+Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+});
+이런식으로 addAll로 값을 넣어준다.
+
+다음으론 Map에서 값을 지우는 방법이다. remove메소드를 사용하여 지워줄수 있다.
+dictionary2.remove(key값); <- 이런식으로 코드를 작성하면 Map안에서 해당key값과 그에 해당하는 value값을 지울 수 있다.
+
+다음으론 값을 변경하는 방법이다. 이거 역시 그냥 key값을 넣고 변경해주면된다.
+dectionary2[key값] = value값;
+이런식으로 작성하면 된다.
+
+Map또한 Map을 생성하는 방법이 2가지가 있는데 
+1) Map dictionary = {};
+2) Map dictionary2 = new Map(); 
+이렇게 2가지가 있다.
+여기서는 List처럼 2번째 방법에서 만약 값을 넣은채로 사용하고 싶을 경우에
+from 메소드를 사용하여 준다.
+ex) Map dectionary3 = new Map.from({
+Key값 : Value값, Key값 : Value값, Key값 : Value값, Key값 : Value값...
+});
+이런식으로 만들면 된다.
+
+이제 마지막으로 Map에서 key값만 다 가져오는 방법 : 
+dictionary3.keys.toList(); <- 이 뜻은 Map자료형인 dictionary3에서 key의 값들을 List형식으로 만들어준다는 뜻이다.
+value값만 다 가져오는 방법 : 
+dictionary3.values.toList(); <- 이건 value값들을 List형식으로 만들어준다는 뜻이다.
+
+List든 Map이든 들어가는 자료형들을 생성할때 꼭 써주는게 좋다! ex) Map<String, String> dictionary4 = {}; <- 이렇게 어떤 형태가 key와 value값으로 들어가는지 기입해주는게 더 좋다.
+
+참고로 Map에서의 key값은 유니크해야한다. 이 말은 만약 key의 값에 또다른 value를 넣어주면 이전에 있다. 해당 key에 대한 value값에 새로 넣어준 value값이 덮어 씌워진다. List와 다르게 같은 값을 중복하여 넣을수 없다는 뜻이다.! Map에서 Key는 딱 하나만 존재할 수 있다. 같은 값 존재 불가능!
+
+Operators
+계산 operator
+int number1 = 10;
+number1 = 9;
+number1 ?? = 4; <- 이 뜻은 만약 number1이 null값이면 4를 넣어라는 뜻이다. 만약 null값이 아니라면 이 코드는 아무것도 실행시키지 않는다.
+
+변수의 값을 변경과 동시에 다시 초기화하는 방법 : 
+number1 += 1; <- 이런식으로 써주면 된다. 그럼 9+1이니까 10이 다시 number1에 담기게 된다.
+number1 /= 2; <- dart에서는 유일하게 /셈을 할때 다른것들과 다른데 만약 /를 하게된다면 나누기 뒤에 들어가는 수를 double로 값을 넣게된다.
+
+print(number1 is int); => true;
+print(number1 is String); => false;
+print(number1 is bool); => false;
+print(number1 is! String) => true;
+
+이렇게 is를 사용할떄는 is! <- is not이렇게 부호를 적어줘야한다.
+
+
+switch와 if문의 차이는 만약 한가지 조건인데 그에 해당하는 값이 여러개인 경우에는 switch문을 사용하는게 더 빠르고 좋고
+조건을 여러가지를 비교해야하는 상황이면 if문을 사용하는게 좋다!
+
+Map 심화! - map이랑 List랑 연계되는것이  많아 알아놔야할게 있다.
+void main(){
+Map<String, String> map = {
+'Apple' : '사과',
+'Banana' : '바나나',
+'Kiwi' : '키위',
+};
+
+print(map.keys);
+print(map.values);  <- 바로위의 keys값들도 마찬가지로 이렇게 하면 각각의 key와 value값들을 Iterable값으로 가져와 출력이된다는 것을 알 수 있다. 
+}
+만약 map.values.toList() -> 이렇게 List로 map의 값들을변경해 주고나면  위의 List심화에서 배웠던 여러 메소드들을 사용할수  있게 된다. 
+map에서도 mapping을 할 수 있다. 
+Mappint - map => (entry) 
+우선 mapping을 하려면 값을 받아야 함으로 
+final newMap = map.entries.map((entry){
+final key = entry.key;
+final value = entry.value;
+
+return '$key는 한글로 $value입니다.';
+});
+이렇게 map을 mapping을 하고싶으면 우선 해당 map에 .entries를 적어주고 다시 .map을 적어준뒤  파라미터로 함수를받는데 그 변수로 (entry)를 넣어주고 이 entry는 map의 key값과 value값들을 모두가져올수  있습니다. 또한 이 entry안에서 다시 key값과 value값을 나눠서 받을수가 있다.
+위에서 보듯이 final key = entry.key; final value = entry.value; 이런식으로 받아오는게가능하다 .
+mapping이니까 리턴을해줘야하는데  위와같이 사용하여주면 map에 들어있는 쨸 위의 값들이
+Apple는 한글로 사과 입니다., Banana는 한글로 바나나입니다., Kiwi는 한글로 키위 입니다.) 이런식으로 바뀌는것을알 수있다. 
+
+이렇게 해서 List심화에서배웠던 forEach, map, reduce, fold와 같은 메소드들을 다 사용할 수 있다. 
+map 변수.entries. forEach / map / reduce / fold 이렇게 사용이  가능하다.
+
+
+asMap() 함수
+asMap함수를 어떨때 사용하냐면 아래와같이  mapping을 사용하여 numbers 리스트안의 값들을변경해 주는데 그 값들의 인덱스와 value값을 통째로 받고 싶을때 사용한다. 
+ex)
+List<int> numbers = [
+0, 1, 2, 3, 4, 
+];
+
+final newMap2 = numbers.map((item){
+return '값이 $item 입니다.';
+});
+
+final newMap3 = numbers.asMap(); 
+<- 이렇게 numbers의 값들을 map으로 바꿀수가 있는데이렇게  설정을 해주면
+print(newMap3)를 했을 때 {0: 0, 1: 1, 2: 2, 3: 3, 4: 4} 이런식으로 출력이된다. 이 뜻이 무엇이냐하면 List인 numbers의 값들 앞에 인덱스 번호가 key값으로 들어간것이다 .
+이제 이것을 사용하여 바꿔보자면
+final newMap3 = numbers.asMap().entries.map((entry){
+final index = entry.key;
+final value = entry.value;
+
+return 'index가 $index 일때 값은 $value 입니다.';
+});
+이런식으로 할수있다.
 
 
 
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 
 Map
