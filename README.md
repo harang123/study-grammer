@@ -36,35 +36,140 @@ ex) _id;
 - 로컬 저장소 : 현재 사용하고 있는 컴퓨터 내부에 저장되어지는 곳!
 - 원격 저장소 : git hub와 같이 원격으로 업로드를 할 수 있는 곳을 뜻함!
 
------------------------------------------------------------------------------------------------------------------------------
-2022/01/01(토)
+****
+# List
 
-dart 기본문법 공부하기! 		*강의 : 코드팩토리 유투브
+#### 정의 : 여러개의 값을 저장할 수 있는 클래스이다.(배열)
+List의 선언 방법은 여러가지가 있는데 우선 유동적인지 고정되어있는지를 기준으로 나눠보겠다.
+1. Growable List -> List arr = []; or List arr2 = new List();
+2. Fixed Length List -> List arr3 = new List(List의 크기); 
 
-var 타입일 경우 첫 번째 선언했을때의 값의 타입이 var타입의 타입으로 지정이된다.
-ex) var name = '코드팩토리';
-var name = 1; // 이렇게 할 경우 오류가 발생한다. 처음 var타입의 값이 String으로 지정이 되었기 때문에 오류가 발생한다.
+1번 방식일때는 아래와 같이 List 요소를 추가, 삭제, 변경이 가능하다.
+리스트 요소 추가방법 : arr.add(값);
+리스트 요소 지우는 방법 : arr.removeAt(index);
+리스트 요소 변경하는 방법 : arr[index] = 값;
 
-하지만 
-dynamic 타입일 경우에는 var 타입과 다르게 다시 변수의 값을 선언할때 타입이 바뀌어도 상관이 없다.
-추가적으로 var타입을 dynamic 타입으로 변환하는 방법이 있는데 var타입의 변수를 지정할때 값을 선언하지 않고 
-ex) var name; 이렇게 선언하면 자동적으로 dynamic 타입으로 변환이 된다.
+2번 방식은 List를 생성할때부터 List의 크기가 정해지기 때문에 .add, .removeAt 과 같은 메소드들의 사용이 불가능하다.
+이런 Fixed Length List의 경우에 값을 지정하는 방법은 arr3[index] = 값; <- 이런방식으로 값을 지정해 주어야 한다.
 
-List 
-2가지 방법이 있다.
-그냥 List 타입에 리스트명을 적어 생성하여도 되고 List<> 제네릭을 사용하여 안에 타입을 적어줘도 된다.
-만약 제네릭에 해당하는 List들의 타입을 선언해 준다면 그 List 안에는 해당 타입의 값들만 들어 올 수 있다. 
-하지만 첫번째 경우처럼 제네릭을 사용하여 타입을 지정하지 않은 경우에는 List에 다양한 타입이 들어올 수 있다.
-  List btsList = [
-    '진',
-    10,
-    '제이홉'
-  ];
-  List<String> redVelvetList = [
-   '아이린',
-    '슬기',
-    '웬디'
-  ];
+다음으로는 List를 생성할때부터 값을 넣은채로 생성하는 방법이 있다.
+1. List arr4 = [
+값, 값, 값, 값 
+];
+2. List arr5 = new List.from([
+값, 값, 값, 값
+]);
+
+## List 심화
+1. Looping(순환한다는 뜻)
+
+	List<String> redVelvet = [
+	'아이린', '슬기', '웬디', '조이', '예리',
+	];
+일반적으로 Looping할때는 forEach를 사용한다. 이것은 List의 메소드이다. 
+Looping - forEach // forEach에서는 파라미터로 함수를 받는다. 거기다가 그 함수에 파라미터도 받는다. 이 파라미터 값은 어떠한 변수를 설정하여 넣어준다.
+
+redVelvet.forEach((value){
+print(value);
+});
+이렇게 하면 List redVelvet의 요소들이 차레로 출력이된다.  또한 forEach의 특징으로는 forEach로 나온 값들은 따로 return 값을 받지 않았다.
+forEach함수 안에서 모든것을 해결하였다. 
+forEach메소드를 실행하면 리스트의 각각의 값을 루핑(for문처럼 돌면서) 이 파라미터안에 넣어준 변수인 value안에 각 값을 넣어준다.
+그래서 그 값들로 우리가 어떠한 처리를 하면 되는 것이다. ex) print(value);
+위의 forEach문과 아래의 for-in 구문은 완전히같은 것이다. 어떤걸 선택하여 쓰는지는 개인적인 취향에 따라 다르다.
+for(String value in redVelvet){
+print(value);
+};
+
+2) Mapping - map (Mapping에서는 일반적으로 map을 사용한다.)
+ex)
+final newList = redVelvet.map((value){
+return '제 이름은 $value입니다.';
+});
+이 map이라는 것은 위의 forEach와는 다르게 리턴값을 받을 수 있다.
+이런식으로 작성하면 redVelvet에 들어있는 각각의 값들을 value로 받아 '제 이름은 $value입니다.'로 값들을 변경해주며 그 값들을 다시 newList의 값들로 넣어주게 됩니다.
+여기서 체크할 것은 map을 사용하였을때 newList를 출력해보면 () <- 소괄호 안에 값들이 들어 있는 것을 알수있다. 이 이유는 map의 출력값들은 List의 부모 클래스인 Iterable형태로 출력되기 때문이다. 만약 List형식으로 바꾸고 싶으면 끝에 .toList()를 붙여주면 된다.
+
+3) Reduce / Fold -> 이것은 Reduce란 함수와 Fold란 함수를 실행하는 것이다.
+3-1) Fold 
+각각의 값들을 루핑(for문과 같은 순환)을 시키면서 그 값들을 이용하여 total을 쌓아가는 역할을 합니다.
+ex)
+List<int> numbers = [
+0, 1, 2, 3, 4, 5, 
+];
+int toal = numbers.fold(0, (total, element){
+return total + element;
+});
+위에서 total은 numbers라는 리스트의 값들을 더한 값을 저장하기 위해 생성한 변수이다.
+fold에는 포지셔널 파라미터가 2개가 들어가는데 처음에 들어가는 것은 처음에 시작하는 값이 들어간다. 
+0부터 시작할거면 0, 1부터 시작할거면 1
+다음으로 두번째로 어갈 파라미터로는 함수가 들어가는데 해당 함수의 파라미터에도 2개의 값이 들어간다.
+여기서 들어가는 2개의 변수는 임의의 변수로 지정해도 상관 없다. 또한 이 안에 들어가는 함수의값도  리턴값을 받는데 
+여기서 numbers의 각 값들이 두번째 파라미터 자리에 들어간 함수의 파라미터중 element자리에 들어가게된다 . 그리고
+루핑을 할때마다 처음에는 0부터 시작하여 total이라는 값이 안에서 리턴해주는값이 total값이 된다.
+그러면 리턴값으로 return total + element; 이렇게 함수의 바디가 정해지게된다 . 그래서 int total 값으로numbers 리스트에 있는 모든 값들을 더한 값이 들어가게 된다. 
+
+여기서 위의 파라미터 안의 total 값은 무조건 첫번째 값이 됨으로 0이 된다. 
+(0, (total, element) <- 여기서처음시작하는값이  0이기 떄문에 total은 0으로 시작하게된다 . 
+따라서 이 fold는 값을 쌓아갈때 자주 사용이 된다.!! 고 알고있으면 될거 같다.
+
+3-2) reduce
+ex)
+List<int> numbers = [
+0, 1, 2, 3, 4, 5, 
+];
+
+int toal2 = numbers.reduce((total, element){
+return total + element;
+});
+
+reduce에서는 파라미터를 하나 받는데 함수를 받는다. 
+reduce도 fold랑 거의 비슷하다. 
+reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없이 파라미터로 함수하나를 받아 실행하고 
+가장 처음 시작하는 값이 total값이 된다. 
+reduce와 fold가 둘다 필요한 이유는 reduce는 numbers 리스트 안에 들어있는 각각의 값들과 리턴값이 반드시 같아야 하고 fold는 상관이 없다.
+fold의 사용예로는
+List<String> names = [
+'코드팩토리', '레드벨벳', 'BTS'
+];
+
+int total3 = names.fold(0, (total, element){
+return total + element.length;
+});
+이렇게 List의 각각의값 들은 String인데 fold함수를 사용하여 int값으로 값을 받아올 수 있다. 
+다시 정리하자면 List 내부의값들의 타입과 fold함수를 사용하여 리턴해주려는 값이 다르면 fold를 사용해야하고
+같으면 reduce를 사용하면 된다. 
+
+3-3) arrow 함수
+
+int total3 = numbers.reduce((total, element) => total + element); <- 안에서 =>의 값이 리턴이 된다는뜻이다. 
+이렇게 작성하는 을 arrow함수라고부른다. 위와같이 성한 것은 결국 reduce함수와 똑같은 기능을 수행한다. 
+int toal2 = numbers.reduce((total, element){
+return total + element;
+});
+다시말해 3-3)안에서 위의 함수와 아래의함수가  같다는 뜻이다. 이건 Mapping에서도 똑같다.
+만약 
+final newList = redVelvet.map((value){
+return '제 이름은 $value입니다.';
+});
+이런 함수가 있다면
+final newList = redVelvet.map((value) => '제 이름은 $value입니다.'); 이렇게 적어도 같은 뜻이된다.
+
+
+List 정리!
+Looping에서는 - forEach를사용한다.
+Mapping - map이라는메소드를  사용하는데 이것은 forEach와 조금다르게 리턴값을 돌려주는데 새로운 리스트를 만들수 있게해준다 . 
+
+Reduce - reduce 함수를 사용한다. 
+Fold = fold함수를사용한다 . 
+Reduce와 Fold는 둘다 값을 점점 쌓아갈때 사용한다. 
+
+****
+
+
+
+
+
 
 Map
 다음으론 Map인데 Map같은 경우는 자바의 HashMap과 아주 비슷하다. HashMap의 key와 Value를 생각하면된다.
