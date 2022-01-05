@@ -84,3 +84,83 @@ Map
      브런치를 일자별로 만들고, 마무리 할 때, 메인 브런치로 머지하는 식으로 작업 할 것
 
 - 2. stydy-grammer readme 마지막 부분에 왜 피드백에 들어갔는지 모르겠음
+
+# 1/6
+
+## PS
+
+문자열 형식으로 입력받아 리스트를 만드는 것을 생각못해 많은 시간을 잡아먹었던 문제였다. arr.map(int.parse)에 대한 이해가 아직 부족함으로 좀 더 공부할 예정이다.
+- arr.map(parameter) map method는 함수를 parameter로 받고, 
+- parameter에 들어가는 함수의 파라미터에 배열 메서드(map)에서 제공하는 파라미터를 자동으로 넣어줌 JS는(value, idx, ... , ...) 뒤에 2개는 기억이 안남 잘안씀
+- 그래서 int.parse(val) 라고 명시적으로 적어주지 않아도 되는 것임
+```
+ex
+예시코드
+arr.map(int.parse) === arr.map((val) => int.parse(val))
+// dart도 화살표 있다는데, 이렇게 쓰는게 정확한진 모름
+```
+
+구름 ide - 시험성적 평균과 등급 구하기
+아래의 코드같은 애들은 앞으로 reduce 메서드로 구현할 것(fold도 reduce랑 비슷한거같던데 설명 카톡으로 보내주세요)
+```
+int count = 0;
+	arrInt.forEach((value){
+		count += value;
+	});
+	double aver = count / 3; // if문에서 비교식에 사용하기 위하여 평균값을 변수에 받아주었다.
+	
+```
+구름 ide - Min 함수  이런느낌 굿!
+
+구름 ide - 네 수의 곱
+작은 부분들을 쪼개서 함수로 만드는 느낌은 좋음
+그런데 이거 reduce면 한줄임
+```
+void main() {
+	String line = stdin.readLineSync(); // 공백으로 값을 입력받기 때문에 String으로 입력받는다.
+	List<String> arrLine = line.split(' ');  // 각각의 값들을 따로 사용해야 하기때문에 List에 값을 분리해 넣어준다.
+	List<int> arrInt = arrLine.map(int.parse).toList();  // String형식의 List를 int형식의 List로 변환하여 준다.
+
+	print(multi(arrInt[0], arrInt[1], arrInt[2], arrInt[3])); // multi 메서드를 만들어 사용하여 네 정수의 곱을 출력한다.
+}
+
+int multi(int a, int b, int c, int d)
+{
+	return mul(mul(a, b), mul(c, d));  // mul 메서드를 생성하여 네 정수의 곱을 구하는 multi 메서드를 만든다.
+}
+
+int mul(int a, int b)
+{
+	return a * b;
+}
+```
+구름 ide - 특정 문자 개수 구하기
+`// 쨀 처음 입력받은 문장을 공백을 이용해 분리하였음에도 완전히 분리가 안되었기때문에 한번 더 분리하였다.` 
+문자열을 모두 개별로 쪼갤려면 처음부터 `value.split('')` 쪼개야됨 
+위에서 잘못쪼개서 아래에서 다시 쪼깨는 이런 식의 코드는 반드시 리팩토링 할 것
+
+구름 ide - 3의 배수 게임
+- 접근 방식 좋음.
+- for 문 말고 다른 방식으로도 작성할 것
+
+구름 ide - 비트연산 기본 1
+비트연산 같은 경우는 웹개발에서 전혀 할일이 없어서 저도 안해봄
+**여러가지 방법으로 풀어보고 싶어 다양하게 풀어봤던것 같다.** ^^
+
+## grammer
+- 뭘 어제 공부한 건지 찾기가 힘들게 만들어 놓음
+- 그래도 전체적인 가독성이 좋아짐
+
+## etc
+- PS,grammer 둘다 최신날짜 브런치에 모든 내용이 다 있고, main이 뒤에있음
+  - 공부를 main에서 하다가, 하루 마무리 할 때, 
+  - 메인 브런치를 올리고(전체 학습 내용기록에 오늘 내용 추가 됨)
+  - 일자 브런치를 만듦
+  - 일자 브런치 안에서 오늘 학습한 내용을 제외한 모든 내용 삭제
+  - 일자 브런치 push 하면 됨
+- 사실 어제 피드백 작성할 때, 화요일 공부량이 너무 작은거 같았는데
+- 오늘은 쫌 한 것 같네요. 전업 취준생인만큼 앞으로 계속 빡세게 했으면 좋겠습니다
+- 회사 10시 출근인데 본인도 아침에 나와서 30~40분씩 보고 피드백 작성중임
+
+  
+
