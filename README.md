@@ -128,7 +128,9 @@ reduce 함수의 특징
 - numbers 리스트 요소의 값과 reduce함수를 사용하여 리턴한 값의 형태가 반드시 같아야 한다. ex) numbers요소가 int형이면 반드시 리턴값이 int형이어야 한다.
 
 reduce에서는 파라미터를 하나 받는데 함수를 받는다. 
-reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없고 파라미터로 함수를 하나 받아 실행하며 가장 처음 시작하는 값이 total값이 된다. 
+reduce는 fold와 다르게 시작하는 값을 적어줄 필요가 없고 파라미터로 함수를 하나 받아 실행하며 가장 처음 시작하는 값이 total값이 된다.
+return total + element가 첫번째로 실행될때 total에는 첫번째 값이 들어가고 element에는 두번째 값부터 들어가기 시작한다!!
+
 
 ### 5. arrow
 
