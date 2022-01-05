@@ -267,6 +267,9 @@ asMap함수를 어떨때 사용하냐면 위와같이 mapping을 사용하여 nu
 
 # 나머지 메서드 문법 정리
 
+## switch
+개념 : Switch문은 크고 작다를 표현할 수 없고 오직 동등조건만 검사할 수 있다.
+
 ## Operators(연산자)
 
 	int number1 = 10;
