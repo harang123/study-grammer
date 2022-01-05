@@ -1,5 +1,39 @@
 # 헷갈리는 개념정리 
 
+#### 올림, 버림, 반올림
+1. 올림
+- 소수점 이하를 올리기 위해서는 ceil이라는 함수를 사용한다.
+
+		double targetNum = 3.514;
+		print(targetNum.ceil());
+		// 4
+2. 버림
+- 소수점 이하를 버리기 위해서는 floor라는 함수를 사용한다.
+
+		double targetNum = 3.514;
+		print(targetNum.floor());
+		// 3
+3. 반올림
+- 소수점 이하를 반올림하기 위해서는 round라는 함수를 사용한다.
+
+		double targetNum = 3.514;
+		print(targetNum.round());
+		// 4
+		targetNum = 3.154;
+		print(targetNum.round());
+		// 3
+4. 소수점 길이 고정 (고정 이하 반올림)
+- 소수점 길이를 고정하기 위해서는 toStringAsFixed라는 함수를 사용한다. 
+
+		var targetNum = 3.125;
+		print(targetNum.toStringAsFixed(2));
+		// 3.13
+		targetNum = 3.121;
+		print(targetNum.toStringAsFixed(2));
+		// 3.12
+=> 여기서 중요한 것은 toStringAsFixed함수를 사용하면 문자열로 반환하기 때문에 숫자로 사용하기 위해서는 double타입으로 형변환을 해야한다. 
+double.parse(targetNum.toStringAsFixed(숫자));
+
 #### 오버로딩과 오버라이딩의 차이점
 1. 오버로딩
 - 메서드의 이름은 같고 매개변수의 갯수나 타입이 다른 함수를 정의하는 것을 의미한다.
