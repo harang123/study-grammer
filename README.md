@@ -154,7 +154,7 @@ arrow 함수의 특징
 
 # Map
 
-#### 정의 : map 또한 List와 마찬가지로 하나의 변수에 여러개의 값을 넣을 수 있다. Map을 보통 Key Value Pair라고 부른다. 사전과 같다고 보면된다.
+#### 정의 : map과 array는 자료구조이다. Map을 보통 Key Value Pair라고 부른다. 사전과 같다고 보면된다.
 
 map의 선언방법 : 크게 형태는 2가지이고 값을 넣지 않았을 경우와 넣었을 경우로 나누어보았다.
 
@@ -226,11 +226,6 @@ asMap함수를 어떨때 사용하냐면 위와같이 mapping을 사용하여 nu
 		return 'index가 $index 일때 값은 $value 입니다.';
 	});
 그런다음 위와같이 작성해주면 index가 0일때 값은 0입니다. 이런식으로 mapping을 사용할수가 있게된다.
-
-
-
-
-
 
 
 Operators
