@@ -162,5 +162,54 @@ int mul(int a, int b)
 - 오늘은 쫌 한 것 같네요. 전업 취준생인만큼 앞으로 계속 빡세게 했으면 좋겠습니다
 - 회사 10시 출근인데 본인도 아침에 나와서 30~40분씩 보고 피드백 작성중임
 
-  
+ # 1/7 금
+
+ ## PS
+- feedback에 대한 개선 ## 3의배수
+  - map 함수 안에서 value를 변경한다음 리턴하지말고 그냥 리턴 하는게 더 좋습니다.
+  - 변경하는 부분을 최소화하는게 안전
+    List<String> arrResult = arr.map((value){
+      value = i++;
+      if((i - 1) % 3 == 0){
+        return 'X';
+      }
+      return value;
+    });
+- 구름 ide - 가위바위보
+  - 본인이 직접 작성해서 푼 것 같은데, 실력이 좀 느는 것 같네요!
+  - 푸는게 1순위, 좋은 코드를 작성하는게 그 다음.
+  ```
+  배열 한번만 돌려도 되는데 3번 쓴건 이게 더 가독성이 좋은 것 같아서(선택임)
+  const inputList = line.split(" ");
+  const scissors = inputList.filter((v) => v === "1").length;
+  const rock = inputList.filter((v) => v === "2").length;
+  const paper = inputList.filter((v) => v === "3").length;
+  const ans = check(scissors, rock, paper);
+  console.log(ans)
+
+  function check(scissors, rock, paper) {
+    const arr = [scissors, rock, paper];
+    const zero = arr.filter((v) => v === 0).length;
+    if (zero !== 1) {
+      return 0
+    }
+    if(arr.indexOf(0) === 0){
+      return arr[2]
+    }
+    if(arr.indexOf(0) === 1){
+      return arr[0]
+    }
+    if(arr.indexOf(0) === 2){
+      return arr[1]
+    }
+  }
+
+  ```
+
+## Grammer
+없음
+## etc
+어느정도 문법은 익숙해지면서 문제 푸는 것 같네요.
+어제 뭘 공부했는지 제가 확인하기도 편하고 좋습니다.
+하루에 얼마정도 공부하는지 알려주세요.
 
