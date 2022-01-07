@@ -1,3 +1,7 @@
+#### 참고
+- 10진수 -> 16진수 전환하는 방법 : int.toRadixString(16)
+- String값 -> ASCII코드 값 전환하는 방법 : String.codeUnitAt(0)
+
 #### List.map() 메소드에 대한 설명
 - arr.map(parameter) map 메서드는 함수를 parameter로 받고, parameter에 들어가는 함수의 파라미터에 배열 메서드(map)에서 제공하는 파라미터를 자동으로 넣어준다. 
 - 그래서 int.parse(val)라고 명시적으로 적어주지 않아도 되는 것이다.
@@ -31,7 +35,9 @@
 		// 3.12
 => 여기서 중요한 것은 toStringAsFixed함수를 사용하면 문자열로 반환하기 때문에 숫자로 사용하기 위해서는 double타입으로 형변환을 해야한다. 
 double.parse(targetNum.toStringAsFixed(숫자));
+
 #### 오버로딩과 오버라이딩의 차이점
+
 1. 오버로딩
 - 메서드의 이름은 같고 매개변수의 갯수나 타입이 다른 함수를 정의하는 것을 의미한다.
 - 리턴값만을 다르게 갖는 오버로딩은 작성할 수 없다.
